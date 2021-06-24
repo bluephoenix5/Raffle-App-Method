@@ -48,11 +48,10 @@ namespace ConsoleUI
             }
         }
 
-
-        //public static int GenerateRandomNumber(int min = 1000, int max = 9999)
-        //{
-        //    return raffleNumber.Next(min, max);
-        //}
+        public static int GenerateRandomNumber(int min = 1000, int max = 9999)
+        {
+            return raffleNumber = raffleNumber.Next(min, max);
+        }
 
 
 
