@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace ConsoleUI
 {
@@ -11,7 +8,8 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-
+            Console.WriteLine("Welcome to the Raffle!");
+            GetUserInfo("");
 
         }
 
@@ -25,32 +23,46 @@ namespace ConsoleUI
 
         static string GetUserInput(string message)
         {
+            Console.WriteLine(message);
             return Console.ReadLine();
         }
 
-        static void GetUserInfo()
+        static string GetUserInfo(string input)
         {
-            string name;
-            string otherGuest;
+            string name = GetUserInput("Please enter your name:");
+            string otherGuest = GetUserInput("Do you want to add another name? (yes or no)").ToLower();
 
             do
             {
-                name = GetUserInput("Please enter your name:");
-                otherGuest = GetUserInput("Do you want to add another name? (yes or no)").ToLower();
+                GetUserInfo(name);
+
+                raffleNumber = GenerateRandomNumber();
                 guests.Add(raffleNumber, name);
-                //raffleNumber = GenerateRandomNumber();
+
+                GetUserInfo(otherGuest);
+
+                if (otherGuest == "no")
+                    break;
+
+                else continue;
+
+
+
             }
             while (otherGuest == "yes");
 
+           
             foreach (var nameAndNum in guests)
             {
-                Console.WriteLine($"{nameAndNum.Key} : {nameAndNum.Value}");
+               Console.WriteLine($"{nameAndNum.Key} : {nameAndNum.Value}");
             }
+
+            return Console.ReadLine();
         }
 
         public static int GenerateRandomNumber(int min = 1000, int max = 9999)
         {
-            return raffleNumber = raffleNumber.Next(min, max);
+            return raffleNumber = _rdm.Next(min, max);
         }
 
 
