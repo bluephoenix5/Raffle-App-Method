@@ -17,6 +17,43 @@ namespace ConsoleUI
 
         //Start writing your code here
 
+        private static Dictionary<int, string> guests = new Dictionary<int, string>();
+        private static int min = 1000;
+        private static int max = 9999;
+        private static int raffleNumber;
+        private static Random _rdm = new Random();
+
+        static string GetUserInput(string message)
+        {
+            return Console.ReadLine();
+        }
+
+        static void GetUserInfo()
+        {
+            string name;
+            string otherGuest;
+
+            do
+            {
+                name = GetUserInput("Please enter your name:");
+                otherGuest = GetUserInput("Do you want to add another name? (yes or no)").ToLower();
+                guests.Add(raffleNumber, name);
+                //raffleNumber = GenerateRandomNumber();
+            }
+            while (otherGuest == "yes");
+
+            foreach (var nameAndNum in guests)
+            {
+                Console.WriteLine($"{nameAndNum.Key} : {nameAndNum.Value}");
+            }
+        }
+
+
+        //public static int GenerateRandomNumber(int min = 1000, int max = 9999)
+        //{
+        //    return raffleNumber.Next(min, max);
+        //}
+
 
 
 
