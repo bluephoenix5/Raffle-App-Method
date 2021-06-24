@@ -32,7 +32,44 @@ namespace ConsoleUI
             string name = GetUserInput("Please enter your name:");
             string otherGuest = GetUserInput("Do you want to add another name? (yes or no)").ToLower();
 
-            do
+            while (name != "")
+            {
+                GetUserInfo(name);
+                raffleNumber = GenerateRandomNumber();
+                guests.Add(raffleNumber, name);
+                GetUserInfo(otherGuest);
+
+                if (name == "")
+                {
+                   GetUserInfo(name);
+                }
+
+                else if (GetUserInfo(otherGuest) == "no")
+                {
+                    break;
+                }
+
+                
+            }
+
+            /*while (otherGuest == "yes")
+            {
+                GetUserInfo(name);
+                raffleNumber = GenerateRandomNumber();
+                guests.Add(raffleNumber, name);
+                
+
+                if (otherGuest == "no")
+
+                    break;
+                else
+                    GetUserInfo(otherGuest);
+            }
+            */
+            //if (otherGuest == "no")
+                //return otherGuest;
+
+            /*do
             {
                 GetUserInfo(name);
 
@@ -50,8 +87,8 @@ namespace ConsoleUI
 
             }
             while (otherGuest == "yes");
+            */
 
-           
             foreach (var nameAndNum in guests)
             {
                Console.WriteLine($"{nameAndNum.Key} : {nameAndNum.Value}");
