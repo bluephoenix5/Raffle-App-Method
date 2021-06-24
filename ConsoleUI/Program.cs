@@ -10,7 +10,6 @@ namespace ConsoleUI
         {
             Console.WriteLine("Welcome to the Raffle!");
             GetUserInfo("");
-
         }
 
         //Start writing your code here
@@ -29,80 +28,38 @@ namespace ConsoleUI
 
         static string GetUserInfo(string input)
         {
-            string name = GetUserInput("Please enter your name:");
-            string otherGuest = GetUserInput("Do you want to add another name? (yes or no)").ToLower();
+            //Get user name, generate rdm num, add to dictionary
+            //How to ask if another name needs to be added
+            //Get other users name, generate rdm num, add to dictionary
 
-            while (name != "")
+            do
             {
-                GetUserInfo(name);
-                raffleNumber = GenerateRandomNumber();
-                guests.Add(raffleNumber, name);
-                GetUserInfo(otherGuest);
+                GetUserInput("Please enter your name:");
 
-                if (name == "")
-                {
-                   GetUserInfo(name);
-                }
+                string name = Console.ReadLine();
 
-                else if (GetUserInfo(otherGuest) == "no")
-                {
-                    break;
-                }
+                GenerateRandomNumber(min, max);
 
-                
-            }
-
-            /*while (otherGuest == "yes")
-            {
-                GetUserInfo(name);
-                raffleNumber = GenerateRandomNumber();
-                guests.Add(raffleNumber, name);
-                
-
-                if (otherGuest == "no")
-
-                    break;
-                else
-                    GetUserInfo(otherGuest);
-            }
-            */
-            //if (otherGuest == "no")
-                //return otherGuest;
-
-            /*do
-            {
-                GetUserInfo(name);
-
-                raffleNumber = GenerateRandomNumber();
                 guests.Add(raffleNumber, name);
 
-                GetUserInfo(otherGuest);
-
-                if (otherGuest == "no")
-                    break;
-
-                else continue;
-
-
-
+                Console.WriteLine("Do you want to add another name (yes or no)?");
             }
-            while (otherGuest == "yes");
-            */
 
-            foreach (var nameAndNum in guests)
-            {
-               Console.WriteLine($"{nameAndNum.Key} : {nameAndNum.Value}");
-            }
+            while (Console.ReadLine() == "yes");
+            
+
+            Console.WriteLine(guests.Count);
 
             return Console.ReadLine();
         }
-
+        
+        
         public static int GenerateRandomNumber(int min = 1000, int max = 9999)
         {
             return raffleNumber = _rdm.Next(min, max);
         }
 
-
+        
 
 
 
