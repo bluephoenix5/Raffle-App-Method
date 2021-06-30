@@ -1,64 +1,85 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Linq;
 
 namespace ConsoleUI
 {
     class Program
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Welcome to the Raffle!");
-            GetUserInfo("");
-        }
+        //Get user name, generate rdm num, add to dictionary
+        //How to ask if another name needs to be added
+        //Get other users name, generate rdm num, add to dictionary
 
-        //Start writing your code here
 
-        private static Dictionary<int, string> guests = new Dictionary<int, string>();
+        public static Dictionary<int, string> guests = new Dictionary<int, string>();
         private static int min = 1000;
         private static int max = 9999;
         private static int raffleNumber;
         private static Random _rdm = new Random();
+        
+
+        public static int GenerateRandomNumber(int min = 1000, int max = 9999)
+        {
+            return _rdm.Next(min, max);
+        }
 
         static string GetUserInput(string message)
         {
             Console.WriteLine(message);
-            return Console.ReadLine();
+            string output = Console.ReadLine();
+            return output;
         }
 
-        static string GetUserInfo(string input)
+        static string GetUserInfo()
         {
-            //Get user name, generate rdm num, add to dictionary
-            //How to ask if another name needs to be added
-            //Get other users name, generate rdm num, add to dictionary
+            string name = null;
+            string otherGuest;
 
             do
             {
-                GetUserInput("Please enter your name:");
-
-                string name = Console.ReadLine();
-
-                GenerateRandomNumber(min, max);
+                name = GetUserInput("Please enter your name:");
+                
+                raffleNumber = GenerateRandomNumber(min, max);
 
                 guests.Add(raffleNumber, name);
 
-                Console.WriteLine("Do you want to add another name (yes or no)?");
+                otherGuest = GetUserInput("Do you want to add another name (yes or no)?").ToLower();
             }
 
-            while (Console.ReadLine() == "yes");
-            
+            while (otherGuest == "yes");
 
-            Console.WriteLine(guests.Count);
+            foreach (var kvp in guests)
+            {
+                Console.WriteLine($"{kvp.Key}, {kvp.Value}\n");
+                
+            }
+
+            Random winner = new Random();
+            int index = winner.Next(guests.Count);
+            KeyValuePair<int, string> pair = guests.ElementAt(index);
+
+            Console.WriteLine("The winner is: " + pair.Value + "!!!");
 
             return Console.ReadLine();
-        }
-        
-        
-        public static int GenerateRandomNumber(int min = 1000, int max = 9999)
-        {
-            return raffleNumber = _rdm.Next(min, max);
+
+                        
         }
 
+        
+            
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Welcome to the Raffle!");
+            GetUserInfo();
+            //MultiLineAnimation();
+        }
+
+        //Start writing your code here
+
+       
+
+        
         
 
 
